@@ -1,0 +1,300 @@
+#Based on i3 config file (v4)
+exec_always --no-startup-id setxkbmap -layout "us,ru,ua" -option "grp:caps_toggle,grp_led:cap"
+exec --no-startup-id nm-applet 
+#exec --no-startup-id pasystray
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id pamac-tray
+exec --no-startup-id blueman-applet
+exec --no-startup-id xfce4-clipman 
+exec --no-startup-id gxkb
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+#xprop | grep WM_CLASS
+assign [class='chromium'] $ws2
+
+set $mod Mod4
+#set $terminal xfce4-terminal
+#set $terminal alacritty
+set $terminal kitty
+set $file_manager thunar
+#set $file_manager nautilus -w
+set $browser chromium
+
+for_window [class="zoom"] floating disable
+for_window [class="feh"] floating enable
+
+for_window [class="^.*"] border pixel 2
+gaps inner 4
+gaps outer 0
+
+
+new_window 1pixel
+new_float 1pixel
+#hide_edge_borders both
+
+#wallpaper
+#exec_always --no-startup-id feh --bg-scale /home/electrocicada/wallpapers/7.png
+#exec_always --no-startup-id feh --bg-scale /home/electrocicada/wallpapers/8.jpeg
+exec_always --no-startup-id feh --bg-scale ~/.wallpapers/maciej-rebisz-008.jpg
+
+font pango: Roboto Medium 8
+
+#NORD
+#set $base00 #2E3440
+#set $base01 #3B4252
+#set $base02 #434C5E
+#set $base03 #4C566A
+#set $base04 #D8DEE9
+#set $base05 #E5E9F0
+#set $base06 #ECEFF4
+#set $base07 #8FBCBB
+#set $base08 #88C0D0
+#set $base09 #81A1C1
+#set $base0A #5E81AC
+#set $base0B #BF616A
+#set $base0C #D08770
+#set $base0D #EBCB8B
+#set $base0E #A3BE8C
+#set $base0F #B48EAD
+
+#EVERFOREST
+set $base00 #2b3339 
+set $base01 #323c41 
+set $base02 #503946 
+set $base03 #868d80 
+set $base04 #d3c6aa 
+set $base05 #d3c6aa 
+set $base06 #e9e8d2 
+set $base07 #fff9e8 
+set $base08 #7fbbb3  
+set $base09 #d699b6 
+set $base0A #83c092  
+set $base0B #dbbc7f   
+set $base0C #e69875 
+set $base0D #a7c080 
+set $base0E #e67e80 
+set $base0F #d699b6 
+
+# class                 border  backgr. text    indicator child_border
+client.focused          $base08 $base08 $base00 $base08 $base0D
+client.focused_inactive $base00 $base01 $base04 $base03 $base01
+client.unfocused        $base00 $base00 $base04 $base01 $base03
+client.urgent           $base09 $base09 $base00 $base09 $base09
+client.placeholder      $base00 $base00 $base06 $base00 $base00
+
+client.background       $base07
+
+bindsym $mod+Return exec $terminal
+bindsym $mod+F2 exec $browser
+bindsym $mod+F3 exec $file_manager
+bindsym $mod+F4 exec "chromium --app=https://music.youtube.com/" 
+
+
+
+# xss-lock grabs alogind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+#Brightnes control
+#bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+#bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+bindsym XF86MonBrightnessUp exec light -A 2 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 2 # decrease screen brightness
+
+#bindsym --release Shift+Print exec --no-startup-id "~/.config/scripts/screenshot.sh -r ~/Pictures/screenshots/"                                  
+#bindsym --release Control+Shift+Print exec --no-startup-id "~/.config/scripts/screenshot.sh -r -c  ~/Pictures/screenshots/"                        
+#bindsym --release Print exec --no-startup-id "~/.config/scripts/screenshot.sh ~/Pictures/screenshots/"                                            
+#bindsym --release Control+Print exec --no-startup-id "~/.config/scripts/screenshot.sh -c ~/Pictures/screenshots/"                                 
+bindsym --release Shift+Print exec --no-startup-id xfce4-screenshooter -fc 
+bindsym --release Ctrl+Shift + Print exec --no-startup-id xfce4-screenshooter -rc 
+bindsym --release Print exec --no-startup-id xfce4-screenshooter -fs ~/Pictures/screenshots
+bindsym --release Ctrl+Print exec --no-startup-id xfce4-screenshooter -rs ~/Pictures/screenshots 
+
+
+
+# Clipboard manadger
+bindsym $mod+c exec xfce4-popup-clipman
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Rofi menu
+#bindsym Ctrl+Tab exec rofi -modi window,drun,filebrowser,combi -combi-modi window,drun,filebrowser -font "JetBrains Mono 12" -icon-theme "Papirus-Adapta-Maia" -show-icons -show combi
+bindsym Ctrl+Tab exec rofi -modi drun -font "JetBrains Mono 12" -show-icons -show drun
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+x split h
+
+# split in vertical orientation
+bindsym $mod+z split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+#Words
+#set $ws1 "1.main"
+#set $ws2 "2.browser"
+#set $ws3 "3.terminal"
+#set $ws4 "4"
+#set $ws5 "5"
+#set $ws6 "6"
+#set $ws7 "7"
+#set $ws8 "8.study"
+#set $ws9 "9.social"
+#set $ws10 "10.music"
+
+#Icons (Font Awesome)
+set $ws1 "1."
+set $ws2 "2."
+set $ws3 "3."
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8."
+set $ws9 "9."
+set $ws10 "10."
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10 
+# move focused container to workspace 
+bindsym $mod+Shift+1 move container to workspace number $ws1 
+bindsym $mod+Shift+2 move container to workspace number $ws2 
+bindsym $mod+Shift+3 move container to workspace number $ws3 
+bindsym $mod+Shift+4 move container to workspace number $ws4 
+bindsym $mod+Shift+5 move container to workspace number $ws5 
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+assign [class="TelegramDesktop"] $ws9
+assign [class="Chromium"] $ws2
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+  bindsym h resize shrink width 10 px or 10 ppt
+  bindsym j resize grow height 10 px or 10 ppt
+  bindsym k resize shrink height 10 px or 10 ppt
+  bindsym l resize grow width 10 px or 10 ppt
+
+  # same bindings, but for the arrow keys
+  bindsym Left resize shrink width 10 px or 10 ppt
+  bindsym Down resize grow height 10 px or 10 ppt
+  bindsym Up resize shrink height 10 px or 10 ppt
+  bindsym Right resize grow width 10 px or 10 ppt
+
+  # back to normal: Enter or Escape or $mod+r
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+  bindsym $mod+r mode "default"
+}
+bindsym $mod+Shift+e mode "system"
+
+mode "system" {
+	bindsym e exit i3
+	bindsym s exec systemctl suspend; mode "default"
+	bindsym r exec systemctl reboot
+	bindsym q exec systemctl poweroff
+
+	bindsym Return mode "default"
+  bindsym $mod+r mode "default"
+	bindsym $mod+Shift+e mode "default"
+}
+bindsym $mod+r mode "resize"
+
+mode "study" {
+  bindsym d exec "wine ~/DeComp/DeComp.exe" exec "feh ~/DeComp/decomp.jpg" mode "default"
+  bindsym Shift+d exec "wine ~/DeComp/fix-deComp.exe" exec "alacritty -e ./d_to_b.out" mode "default"
+  bindsym t exec "chromium --app=https://teams.microsoft.com" mode "default"
+  bindsym z exec "zoom" mode "default"
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+bindsym $mod+Shift+s mode "study"
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+#bar {
+# status_command i3blocks
+#}
+bar {
+  position top
+  tray_padding 0
+  separator_symbol "   |   "
+  tray_output primary
+  workspace_min_width 40
+  status_command i3status -c ~/.config/i3status/i3status.conf
+  colors {
+
+      background $base00
+    statusline $base08
+
+      focused_workspace  $base00  $base0c
+    active_workspace   $base00  $base0a
+    inactive_workspace $base00  $base0d
+    urgent_workspace   $base00  $base0f
+
+    }
+}
