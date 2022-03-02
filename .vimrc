@@ -93,6 +93,8 @@ set noswapfile
 "Plugins
 call plug#begin('~/.vim/plugged')
 
+Plug 'tpope/vim-fugitive'
+
 "i3 confif syntax highlighting
 Plug 'mboughaba/i3config.vim'
 aug i3config_ft_detection
@@ -125,7 +127,7 @@ let g:NERDCustomDelimiters = { 'c': { 'left': '//' }  }
 Plug 'kien/ctrlp.vim'
 
 "Plug 'ryanoasis/vim-devicons'
-"let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 1
 
 
 Plug 'easymotion/vim-easymotion'
@@ -250,6 +252,9 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set background=dark
 let g:everforest_background = 'hard'
 let g:everforest_enable_italic = 1
+let g:everforest_spell_foreground = 'colored'
+let g:everforest_diagnostic_text_highlight = 1
+let g:everforest_diagnostic_line_highlight = 1
 
 "Colorscheme selector: 
 "colorscheme nord
