@@ -51,6 +51,7 @@ endif
 autocmd InsertEnter * set cursorline
 autocmd InsertLeave * set nocursorline
 
+
 "Highlight vertical line in .go files
 if (&ft=='go')
   set colorcolumn=90
@@ -95,6 +96,19 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-fugitive'
 
+Plug 'airblade/vim-gitgutter'
+
+" Use fontawesome icons as signs
+let g:gitgutter_sign_added = '+'
+let g:gitgutter_sign_modified = '>'
+let g:gitgutter_sign_removed = '-'
+let g:gitgutter_sign_removed_first_line = '^'
+let g:gitgutter_sign_modified_removed = '<'
+
+let g:gitgutter_override_sign_column_highlight = 1
+highlight SignColumn guibg=bg
+"highlight SignColumn ctermbg=bg
+
 "i3 confif syntax highlighting
 Plug 'mboughaba/i3config.vim'
 aug i3config_ft_detection
@@ -126,7 +140,6 @@ let g:NERDCustomDelimiters = { 'c': { 'left': '//' }  }
 
 Plug 'kien/ctrlp.vim'
 
-"Plug 'ryanoasis/vim-devicons'
 let g:airline_powerline_fonts = 1
 
 
@@ -197,9 +210,10 @@ let c_no_curly_error=1
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-let g:airline_theme = 'everforest'
+"let g:airline_theme = 'everforest'
+let g:airline_theme = 'gruvbox'
 
- "let g:airline#extensions#tabline#enabled = 1
+ "let g:#extensions#tabline#enabled = 1
  "let g:airline#extensions#tabline#left_sep = ' '
  "let g:airline#extensions#tabline#left_alt_sep = '|'
  "let g:airline#extensions#tabline#formatter = 'default'
@@ -213,7 +227,6 @@ let g:ycm_enable_diagnostic_signs = 0
 "Vim markdown
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-
 
 Plug 'mhinz/vim-startify'
 
@@ -238,7 +251,6 @@ autocmd Filetype tex set background=light
 Plug 'gcollura/vim-masm'
 
 Plug 'wilriker/gcode.vim'
-
 call plug#end()
 
 
@@ -246,6 +258,7 @@ call plug#end()
 if has('termguicolors')
   set termguicolors
 endif
+
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
@@ -256,15 +269,27 @@ let g:everforest_spell_foreground = 'colored'
 let g:everforest_diagnostic_text_highlight = 1
 let g:everforest_diagnostic_line_highlight = 1
 
+let g:gruvbox_italic = 1
+let g:gruvbox_italicize_strings = 1
+let g:gruvbox_bold = 1
+let g:gruvbox_underline = 1
+let g:gruvbox_contrast_dark = 'hard'
+"let g:gruvbox_number_column = 'bg1'
+let g:gruvbox_vert_split = 'bg1'
+let g:gruvbox_invert_selection = 1
+
+
 "Colorscheme selector: 
 "colorscheme nord
-"colorscheme gruvbox 
+colorscheme gruvbox 
 "colorscheme onehalfdark
-colorscheme everforest
+"colorscheme everforest
+autocmd Filetype tex colorscheme everforest
+autocmd Filetype tex let g:airline_theme = 'everforest'
 
 
 "Alacrittu colors patch
-if &term == "alacritty"        
+if &term == "alacritty"
     let &term = "xterm-256color"
 endif
 

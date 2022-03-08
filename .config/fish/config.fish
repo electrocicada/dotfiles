@@ -3,6 +3,7 @@ if status is-interactive
 end
 
 set fish_greeting
+set -e KITTY_SHELL_INTEGRATION
 
 alias config='/usr/bin/git --git-dir=/home/electrocicada/.cfg/ --work-tree=/home/electrocicada'
 
@@ -19,3 +20,5 @@ alias c='clear'
 #replase ls via exa
 alias ll='exa -lahH'
 alias ls='exa -F'
+
+#sh ~/bars

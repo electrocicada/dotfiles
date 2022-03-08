@@ -8,6 +8,7 @@ exec --no-startup-id blueman-applet
 exec --no-startup-id xfce4-clipman 
 exec --no-startup-id gxkb
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id picom -b
 
 #xprop | grep WM_CLASS
 assign [class='chromium'] $ws2
@@ -24,65 +25,61 @@ for_window [class="zoom"] floating disable
 for_window [class="feh"] floating enable
 
 for_window [class="^.*"] border pixel 2
-gaps inner 4
-gaps outer 0
+#gaps inner 4
+#gaps outer 0
 
 
-new_window 1pixel
-new_float 1pixel
+#new_window 1pixel
+#new_float 1pixel
 #hide_edge_borders both
 
 #wallpaper
 #exec_always --no-startup-id feh --bg-scale /home/electrocicada/wallpapers/7.png
 #exec_always --no-startup-id feh --bg-scale /home/electrocicada/wallpapers/8.jpeg
-exec_always --no-startup-id feh --bg-scale ~/.wallpapers/maciej-rebisz-008.jpg
+#exec_always --no-startup-id feh --bg-scale ~/.wallpapers/maciej-rebisz-008.jpg
+#exec_always --no-startup-id feh --bg-scale ~/.wallpapers/gruvbox_g1.png
+exec_always --no-startup-id feh  --bg-fill ~/.wallpapers/gruvbox_planet.jpg
 
-font pango: Roboto Medium 8
+font pango: Roboto Medium 8.4
 
-#NORD
-#set $base00 #2E3440
-#set $base01 #3B4252
-#set $base02 #434C5E
-#set $base03 #4C566A
-#set $base04 #D8DEE9
-#set $base05 #E5E9F0
-#set $base06 #ECEFF4
-#set $base07 #8FBCBB
-#set $base08 #88C0D0
-#set $base09 #81A1C1
-#set $base0A #5E81AC
-#set $base0B #BF616A
-#set $base0C #D08770
-#set $base0D #EBCB8B
-#set $base0E #A3BE8C
-#set $base0F #B48EAD
+#GRUVBOX
+set $bg   #282828
+set $bg0  #1d2021
+set $bg1  #3c3836
+set $bg2  #504945
+set $bg3  #665c54
+set $bg4  #7c6f64
+set $gray #928375
+set $fg   #ebdbb2
+set $fg4  #a89984
+set $fg3  #bdae93
+set $fg2  #d5c4a1
+set $fg1  #ebdbb2
+set $fg0  #fbf1c7
+set $red #cc241d
+set $green #98971a
+set $GREEN #b8bb26
+set $yellow #d79921
+set $blue #458588
+set $purple #b16286
+set $aqua #689d68
+set $gray #a89984
+set $darkgray #1d2021
 
-#EVERFOREST
-set $base00 #2b3339 
-set $base01 #323c41 
-set $base02 #503946 
-set $base03 #868d80 
-set $base04 #d3c6aa 
-set $base05 #d3c6aa 
-set $base06 #e9e8d2 
-set $base07 #fff9e8 
-set $base08 #7fbbb3  
-set $base09 #d699b6 
-set $base0A #83c092  
-set $base0B #dbbc7f   
-set $base0C #e69875 
-set $base0D #a7c080 
-set $base0E #e67e80 
-set $base0F #d699b6 
 
-# class                 border  backgr. text    indicator child_border
-client.focused          $base08 $base08 $base00 $base08 $base0D
-client.focused_inactive $base00 $base01 $base04 $base03 $base01
-client.unfocused        $base00 $base00 $base04 $base01 $base03
-client.urgent           $base09 $base09 $base00 $base09 $base09
-client.placeholder      $base00 $base00 $base06 $base00 $base00
+# green gruvbox
+# class                 border|backgr|text|indicator|child_border
+#client.focused          $green $green $darkgray $purple $darkgray
+#client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
+#client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
+#client.urgent           $red $red $white $red $red
 
-client.background       $base07
+# blue gruvbox
+# class                 border|backgr|text|indicator|child_border
+client.focused          $GREEN $GREEN $darkgray $purple $GREEN
+client.focused_inactive $GREEN $bg1 $fg2 $purple $fg4
+client.unfocused        $bg1 $bg1 $fg4 $purple $fg4
+client.urgent           $red $red $white $red $red
 
 bindsym $mod+Return exec $terminal
 bindsym $mod+F2 exec $browser
@@ -126,7 +123,7 @@ floating_modifier $mod
 
 # Rofi menu
 #bindsym Ctrl+Tab exec rofi -modi window,drun,filebrowser,combi -combi-modi window,drun,filebrowser -font "JetBrains Mono 12" -icon-theme "Papirus-Adapta-Maia" -show-icons -show combi
-bindsym Ctrl+Tab exec rofi -modi drun -font "JetBrains Mono 12" -show-icons -show drun
+bindsym Ctrl+Tab exec rofi -drun -drun -font "JetBrains Mono 12" -icon-theme "Gruvbox" -show-icons -show drun
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -188,7 +185,7 @@ bindsym $mod+a focus parent
 #set $ws10 "10.music"
 
 #Icons (Font Awesome)
-set $ws1 "1."
+set $ws1 "1."
 set $ws2 "2."
 set $ws3 "3."
 set $ws4 "4"
@@ -258,6 +255,7 @@ mode "system" {
 	bindsym q exec systemctl poweroff
 
 	bindsym Return mode "default"
+	bindsym Escape mode "default"
   bindsym $mod+r mode "default"
 	bindsym $mod+Shift+e mode "default"
 }
@@ -286,15 +284,16 @@ bar {
   tray_output primary
   workspace_min_width 40
   status_command i3status -c ~/.config/i3status/i3status.conf
-  colors {
-
-      background $base00
-    statusline $base08
-
-      focused_workspace  $base00  $base0c
-    active_workspace   $base00  $base0a
-    inactive_workspace $base00  $base0d
-    urgent_workspace   $base00  $base0f
-
+   colors {
+        # bar background color
+        background $bg0
+        # text color used for blocks that do not have a color specified.
+        statusline $fg4
+        # workspaces section
+        #                    border  backgr. text
+        focused_workspace    $GREEN $GREEN $darkgray
+        inactive_workspace   $bg1 $bg1 $fg4
+        active_workspace     $bg1 $bg1 $fg4
+        urgent_workspace     $yellow $yellow $bg0
     }
 }
