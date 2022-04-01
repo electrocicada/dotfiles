@@ -43,40 +43,38 @@ exec_always --no-startup-id feh  --bg-fill ~/.wallpapers/gruvbox_planet.jpg
 font pango: Roboto Medium 8.4
 
 #GRUVBOX
-set $bg   #282828
-set $bg0  #1d2021
-set $bg1  #3c3836
-set $bg2  #504945
-set $bg3  #665c54
-set $bg4  #7c6f64
-set $gray #928375
-set $fg   #ebdbb2
-set $fg4  #a89984
-set $fg3  #bdae93
-set $fg2  #d5c4a1
-set $fg1  #ebdbb2
-set $fg0  #fbf1c7
-set $red #cc241d
-set $green #98971a
-set $GREEN #b8bb26
+set $bg     #282828
+set $bg0    #1d2021
+set $bg1    #3c3836
+set $bg2    #504945
+set $bg3    #665c54
+set $bg4    #7c6f64
+set $gray   #928375
+set $fg     #ebdbb2
+set $fg4    #a89984
+set $fg3    #bdae93
+set $fg2    #d5c4a1
+set $fg1    #ebdbb2
+set $fg0    #fbf1c7
+set $red    #cc241d
+set $green  #98971a
+set $GREEN  #b8bb26
 set $yellow #d79921
-set $blue #458588
+set $blue   #458588
 set $purple #b16286
-set $aqua #689d68
-set $gray #a89984
-set $darkgray #1d2021
-
+set $aqua   #689d68
+set $gray   #a89984
 
 # green gruvbox
 # class                 border|backgr|text|indicator|child_border
-#client.focused          $green $green $darkgray $purple $darkgray
-#client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
-#client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
+#client.focused          $green $green $bg0 $purple $darkgray
+#client.focused_inactive $bg0 $darkgray $yellow $purple $darkgray
+#client.unfocused        $bg0 $darkgray $yellow $purple $darkgray
 #client.urgent           $red $red $white $red $red
 
 # blue gruvbox
 # class                 border|backgr|text|indicator|child_border
-client.focused          $GREEN $GREEN $darkgray $purple $GREEN
+client.focused          $GREEN $GREEN $bg0 $purple $GREEN
 client.focused_inactive $GREEN $bg1 $fg2 $purple $fg4
 client.unfocused        $bg1 $bg1 $fg4 $purple $fg4
 client.urgent           $red $red $white $red $red
@@ -101,8 +99,8 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 #Brightnes control
 #bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 #bindsym XF86MonBrightnessDown exec xbacklight -dec 10
-bindsym XF86MonBrightnessUp exec light -A 2 # increase screen brightness
-bindsym XF86MonBrightnessDown exec light -U 2 # decrease screen brightness
+#bindsym XF86MonBrightnessUp exec light -A 2 # increase screen brightness
+#bindsym XF86MonBrightnessDown exec light -U 2 # decrease screen brightness
 
 #bindsym --release Shift+Print exec --no-startup-id "~/.config/scripts/screenshot.sh -r ~/Pictures/screenshots/"                                  
 #bindsym --release Control+Shift+Print exec --no-startup-id "~/.config/scripts/screenshot.sh -r -c  ~/Pictures/screenshots/"                        
@@ -291,7 +289,7 @@ bar {
         statusline $fg4
         # workspaces section
         #                    border  backgr. text
-        focused_workspace    $GREEN $GREEN $darkgray
+        focused_workspace    $GREEN $GREEN $bg0
         inactive_workspace   $bg1 $bg1 $fg4
         active_workspace     $bg1 $bg1 $fg4
         urgent_workspace     $yellow $yellow $bg0

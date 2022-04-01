@@ -40,6 +40,8 @@ set t_ut = ""
 set encoding=utf8
 set guifont=DroidSansMono\ Nerd\ Font\ 11
 
+set termguicolors
+
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -99,10 +101,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " Use fontawesome icons as signs
-let g:gitgutter_sign_added = '+'
-let g:gitgutter_sign_modified = '>'
-let g:gitgutter_sign_removed = '-'
-let g:gitgutter_sign_removed_first_line = '^'
+let g:gitgutter_sign_added = ''
+let g:gitgutter_sign_modified = ''
+let g:gitgutter_sign_removed = ''
+let g:gitgutter_sign_removed_first_line = ''
 let g:gitgutter_sign_modified_removed = '<'
 
 let g:gitgutter_override_sign_column_highlight = 1
@@ -251,6 +253,19 @@ autocmd Filetype tex set background=light
 Plug 'gcollura/vim-masm'
 
 Plug 'wilriker/gcode.vim'
+
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+let g:Hexokinase_optInPatterns = [
+\     'full_hex',
+\     'triple_hex',
+\     'rgb',
+\     'rgba',
+\     'hsl',
+\     'hsla',
+\ ]
+"let g:Hexokinase_highlighters = ['foreground']
+let g:Hexokinase_highlighters = ['backgroundfull']
+
 call plug#end()
 
 
