@@ -14,6 +14,7 @@ alias ivm='vim'
 alias mvi='vim'
 alias miv='vim'
 
+
 #clear
 alias c='clear'
 
@@ -21,4 +22,11 @@ alias c='clear'
 alias ll='exa -lahH'
 alias ls='exa -F'
 
+#quick thunar call
+alias tn='thunar'
+
 #sh ~/bars
+export EDITOR=vim
+export GOPATH=$HOME/go
+
+theme_gruvbox dark hard
