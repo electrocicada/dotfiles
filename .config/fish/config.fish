@@ -1,32 +1,25 @@
-if status is-interactive
-    # Commands to run in interactive sessions can go here
+if test -f ~/.fish_profile
+  source ~/.fish_profile
 end
 
 set fish_greeting
-set -e KITTY_SHELL_INTEGRATION
 
-alias config='/usr/bin/git --git-dir=/home/electrocicada/.cfg/ --work-tree=/home/electrocicada'
-
-#vim))
-alias vmi='vim'
-alias imv='vim'
-alias ivm='vim'
-alias mvi='vim'
-alias miv='vim'
+alias grep="rg"
+alias arch="cd /run/media/pryamcem/Archive"
+alias ll="exa -lah --git --icons"
+alias ls="exa --icons"
 
 
-#clear
-alias c='clear'
+alias v="vim"
+alias vmi="vim"
+alias miv="vim"
+alias mvi="vim"
+alias ivm="vim"
+alias imv="vim"
 
-#replase ls via exa
-alias ll='exa -lahH'
-alias ls='exa -F'
-
-#quick thunar call
-alias tn='thunar'
-
-#sh ~/bars
-export EDITOR=vim
-export GOPATH=$HOME/go
-
-theme_gruvbox dark hard
+alias :q="exit"
+alias :Q="exit"
+alias :wq="exit"
+alias q="exit"
+alias Q="exit"
+alias wq="exit"
